@@ -1,0 +1,25 @@
+# Node modules
+node_modules/
+
+# Résultats Playwright (screenshots, videos, traces, rapports)
+test-results/
+playwright-report/
+
+# Dossiers de build TypeScript (adapter selon ta config)
+dist/
+build/
+
+# Logs
+*.log
+
+# Variables d'environnement locales
+.env
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Systèmes (macOS, Windows)
+.DS_Store
+Thumbs.db
