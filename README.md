@@ -18,12 +18,14 @@ npx tsc --init
 /project-root
 ├── tests/
 │   └── auth/
-│       └── login.spec.ts         # Tests de connexion
-├── helpers/
+│       ├── login.test.ts           # Tests de connexion
+│       ├── logout.test.ts          # Tests de déconnexion
+│       ├── invalidCredentials.test.ts  # Tests pour identifiants invalides
+│       └── emptyFields.test.ts     # Tests pour champs vides├── helpers/
 │   └── authHelper.ts             # Fonctions d'authentification (login)
 ├── playwright.config.ts          # Configuration Playwright
 ├── tsconfig.json                 # Configuration TypeScript
-└── package.json
+└── package.json                  # Dépendances et scripts npm
 ```
 ## Explication 
 ### - helpers/authHelper.ts
