@@ -1,7 +1,7 @@
 {
   "name": "open_cart_playwright",
   "version": "1.0.0",
-  "description": "",
+  "description": "```bash\r #Initialiser un projet Node.js\r npm init -y\r #Installer Playwright avec TypeScript\r npm install -D @playwright/test\r npx playwright install\r #Initialiser la structure Playwright (création automatique des fichiers de base)\r #configuration TypeScript\r npm install typescript\r npx tsc --init\r ```",
   "main": "index.js",
   "directories": {
     "test": "tests"

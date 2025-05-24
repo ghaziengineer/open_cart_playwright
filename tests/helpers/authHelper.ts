@@ -1,31 +1,40 @@
-import { test, expect } from '@playwright/test';
-import { login, USERS } from '../helpers/authHelper';
+import { Page } from '@playwright/test';
 
-// Récupération dynamique des noms d'utilisateurs valides et bloqués
-const validUsers = Object.keys(USERS.valid) as (keyof typeof USERS.valid)[];
-const lockedOutUsers = Object.keys(USERS.lockedOut) as (keyof typeof USERS.lockedOut)[];
+export const USERS = {
+valid: {
+standard_user: 'secret_sauce',
+problem_user: 'secret_sauce',
+performance_glitch_user: 'secret_sauce',
+error_user: 'secret_sauce',
+visual_user: 'secret_sauce',
+},
+lockedOut: {
+locked_out_user: 'secret_sauce',
+},
+} as const;
 
-// Pour chaque utilisateur valide, on définit un test qui doit réussir la connexion
-validUsers.forEach((username) => {
-  test(`Connexion réussie pour ${username}`, async ({ page }) => {
-    // Utilisation du helper login pour effectuer la connexion
-    await login(page, username);
+export type ValidUser = keyof typeof USERS.valid;
+export type LockedOutUser = keyof typeof USERS.lockedOut;
+export type Username = ValidUser | LockedOutUser;
 
-    // Vérification que l'URL correspond bien à la page d'inventaire
-    await expect(page).toHaveURL(/inventory.html/);
+export async function login(page: Page, username: Username) {
+  let password: string | undefined;
 
-    // Vérification que la liste des produits est visible
-    await expect(page.locator('.inventory_list')).toBeVisible();
-  });
-});
+  if (username in USERS.valid) {
+    password = USERS.valid[username as ValidUser];
+  } else if (username in USERS.lockedOut) {
+    password = USERS.lockedOut[username as LockedOutUser];
+  } else {
+    throw new Error(`Utilisateur inconnu: ${username}`);
+  }
 
-// Pour chaque utilisateur bloqué, on définit un test qui doit refuser la connexion avec un message d'erreur
-lockedOutUsers.forEach((username) => {
-  test(`Connexion refusée pour ${username}`, async ({ page }) => {
-    // Tentative de connexion
-    await login(page, username);
+  await page.goto('https://www.saucedemo.com/');
+  await page.fill('#user-name', username);
+  await page.fill('#password', password);
 
-    // Vérification que le message d'erreur contient "locked out"
-    await expect(page.locator('[data-test="error"]')).toContainText('locked out');
-  });
-});
+  // Attend que le bouton soit visible avec timeout 15s
+  await page.waitForSelector('#login-button', { state: 'visible', timeout: 15000 });
+
+  // Clique avec timeout allongé
+  await page.click('#login-button', { timeout: 15000 });
+}
