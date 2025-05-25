@@ -1,65 +1,86 @@
-# Automatisation des tests sur le site Saucedemo avec Playwright et TypeScript
+# 🧪 Automatisation des tests Saucedemo avec Playwright & TypeScript
+Ce projet met en œuvre des tests automatisés E2E, API, performance et sécurité pour le site saucedemo.com à l’aide de Playwright et TypeScript.
 
-## Configuration
-
+## ⚙️ Installation & Configuration
 ```bash
-#Initialiser un projet Node.js
+# Initialiser un projet Node.js
 npm init -y
-#Installer Playwright avec TypeScript
+
+# Installer Playwright avec support TypeScript
 npm install -D @playwright/test
 npx playwright install
-#Initialiser la structure Playwright (création automatique des fichiers de base)
-#configuration TypeScript
+
+# Initialiser TypeScript
 npm install typescript
 npx tsc --init
 ```
-## Architecture du projet
+## 🗂️ Structure du projet
 ```bash
 /project-root
 ├── tests/
-│   └── auth/
-│       ├── login.test.ts                  # Tests de connexion
-│       ├── logout.test.ts                 # Tests de déconnexion
-│       ├── invalidCredentials.test.ts     # Tests pour identifiants invalides
-│       └── emptyFields.test.ts            # Tests pour champs vides
-|   └── cart/
-|       ├── addToCart.test.ts              # Ajout d'un seul article
-|       ├── addMultipleItems.test.ts       # Ajout de plusieurs articles
-|       ├── removeFromCart.test.ts         # Suppression d'articles
-|       ├── cartCounter.test.ts            # Vérifie le badge du panier
-|       ├── continueShopping.test.ts       # Test du bouton "Continue Shopping"
-|       └── unauthorizedAccess.test.ts     # Accès au panier sans login
-|   └── inventory/
-|       ├── inventoryImagesLoad.test.ts    # Vérifie le chargement des images produits
-|       ├── inventoryItemDetails.test.ts   # Vérifie l’affichage des détails produits
-|       ├── inventoryPageLoad.test.ts      # Vérifie le chargement de la page inventory
-|       ├── inventorySort.test.ts          # Vérifie le tri des produits
-|       ├── productDetail.test.ts          # Vérifie la page détail produit
-|       └── productList.test.ts            # Vérifie la liste des produits
-|
-├── helpers/
-|       ├── authHelper.ts                  # Fonctions d'authentification (login)
-|       ├── cartHelper.ts                  # Fonctions du panier (cart)
-|       ├── inventoryHelper.ts             # Fonctions utilitaires pour tests inventory
-├── playwright.config.ts                   # Configuration Playwright
-├── tsconfig.json                          # Configuration TypeScript
-└── package.json                           # Dépendances et scripts npm
+│   ├── ui/                                # Tests fonctionnels UI end-to-end avec Playwright
+│   │   ├── auth/                          # Scénarios liés à l’authentification utilisateur
+│   │   │   ├── login.test.ts              # Tests de connexion valides
+│   │   │   ├── logout.test.ts             # Tests de déconnexion
+│   │   │   ├── invalidCredentials.test.ts # Tests pour identifiants invalides
+│   │   │   └── emptyFields.test.ts        # Tests pour champs de connexion vides
+│   │   ├── cart/                          # Scénarios liés au panier d’achats
+│   │   │   ├── addToCart.test.ts          # Ajout d’un seul article au panier
+│   │   │   ├── addMultipleItems.test.ts   # Ajout de plusieurs articles simultanément
+│   │   │   ├── removeFromCart.test.ts     # Suppression d’articles du panier
+│   │   │   ├── cartCounter.test.ts        # Vérification du compteur (badge) du panier
+│   │   │   ├── continueShopping.test.ts   # Test du bouton « Continue Shopping »
+│   │   │   └── unauthorizedAccess.test.ts # Accès non autorisé au panier sans connexion
+│   │   └── inventory/                     # Tests liés à la gestion et affichage des produits
+│   │       ├── inventoryImagesLoad.test.ts # Vérifie le chargement des images produits
+│   │       ├── inventoryItemDetails.test.ts # Vérifie les détails des produits affichés
+│   │       ├── inventoryPageLoad.test.ts  # Vérifie le chargement complet de la page inventaire
+│   │       ├── inventorySort.test.ts      # Vérifie le fonctionnement du tri des produits
+│   │       ├── productDetail.test.ts      # Vérifie la page de détail d’un produit
+│   │       └── productList.test.ts        # Vérifie la liste des produits affichés
+├── tests/performance/                    # Tests de performance et charge (ex: JMeter)
+│
+├── tests/security/                       # Tests de sécurité (accès non autorisé, redirections)
+│   ├── redirectAfterLogout.test.ts      # Redirection après déconnexion
+│   ├── csrfProtection.test.ts           # Test de protection CSRF (si applicable)
+│   └── sessionExpiration.test.ts        # Test expiration de session / token
+│
+├── helpers/                             # Fonctions utilitaires partagées et helpers
+│   ├── authHelper.ts                    # Fonctions réutilisables liées à l’authentification
+│   ├── cartHelper.ts                    # Fonctions utilitaires pour gérer le panier
+│   ├── inventoryHelper.ts               # Fonctions spécifiques aux tests d’inventaire
+│   └── apiHelper.ts                     # Helper commun pour appels API et gestion requêtes
+│
+├── playwright.config.ts                  # Configuration générale Playwright (tests UI)
+├── tsconfig.json                        # Configuration TypeScript
+└── package.json                         # Gestionnaire de dépendances et scripts npm
+
 ```
-## Explication 
-### - helpers/authHelper.ts
-contient la logique pour la connexion à Saucedemo.
-Il gère les différents types d’utilisateurs (valides et bloqués) et remplit automatiquement les champs du formulaire de login.
+## 🚀 Exécution des tests
+### Lancer tous les tests
+```bash
+npx playwright test
+```
+### Lancer un dossier spécifique
+```bash
+npx playwright test tests/ui/auth
+npx playwright test tests/performance
+```
+### Lancer un fichier de test précis
+```bash
+npx playwright test tests/ui/cart/addToCart.test.ts
+```
+### 🔁 Intégration Continue (CI) avec GitHub Actions
+Ajoute le fichier suivant :  
+sauce_demo_playwright/.github/workflows/playwright.yml  
+Exemple de déclencheurs :  
+À chaque push ou pull request vers main  
 
-### -helpers/cartHelper.ts
-Contient la logique des actions liées au panier sur Saucedemo. Il inclut des fonctions pour ajouter, retirer et vérifier des articles dans le panier, tout en s'assurant d'être sur la bonne page avant chaque action. Les interactions se font via des sélecteurs ciblés sur les boutons « Add to cart » et « Remove », avec une navigation automatique entre les pages d’inventaire et de panier.
-## Continous integration CI ( github  actions ) 
-- Crée sauce_demo_playwright\.github\workflows\playwright.yml qui contient la logique du déclenchement de la pipeline
-Execution possible automatiquement :
-- aprés push , pull request
-localement avec :  $env:CI="true"; npx playwright test
-
-## Référence 
-https://playwright.dev/ 
-
-
-
+Possibilité de l’exécuter localement via :  
+```bash
+$env:CI="true"; npx playwright test  # PowerShell
+ou bien execution automatique aprés chaque PR et merge vers main
+```
+### 📚 Références
+https://playwright.dev/  
+https://www.saucedemo.com/

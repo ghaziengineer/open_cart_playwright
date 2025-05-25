@@ -1,6 +1,6 @@
 // Importation des fonctions de test Playwright et de la fonction login personnalisée
 import { test, expect } from '@playwright/test';
-import { login } from '../helpers/authHelper';
+import { login } from '../../helpers/authHelper';
 
 // Groupe de tests pour la fonctionnalité de déconnexion
 test.describe('Déconnexion', () => {

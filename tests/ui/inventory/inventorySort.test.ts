@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { login } from '../helpers/authHelper';
-import { goToInventoryPage, sortInventory, getProductPrices } from '../helpers/inventoryHelper';
+import { login } from '../../helpers/authHelper';
+import { goToInventoryPage, sortInventory, getProductPrices } from '../../helpers/inventoryHelper';
 
 test('Inventory - Tri des produits par prix (bas vers haut)', async ({ page }) => {
   await login(page, 'standard_user');

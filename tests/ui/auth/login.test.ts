@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { login, USERS } from '../helpers/authHelper';
+import { login, USERS } from '../../helpers/authHelper';
 
 // Récupération des listes d'utilisateurs à partir de l'objet USERS défini dans authHelper
 // validUsers : utilisateurs dont la connexion doit réussir

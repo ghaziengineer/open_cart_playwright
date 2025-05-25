@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { login } from '../helpers/authHelper';
+import { login } from '../../helpers/authHelper';
 
 test('Liste des produits - tous les produits doivent être visibles après connexion', async ({ page }) => {
   await login(page, 'standard_user');

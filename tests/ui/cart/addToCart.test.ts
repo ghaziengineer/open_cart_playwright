@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { login } from '../helpers/authHelper';
-import { addItemToCart, CartItems } from '../helpers/cartHelper';
+import { login } from '../../helpers/authHelper';
+import { addItemToCart, CartItems } from '../../helpers/cartHelper';
 
 test.describe('Panier - Ajout d\'article', () => {
   // Se connecter avant chaque test

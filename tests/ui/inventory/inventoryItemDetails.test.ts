@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { login } from '../helpers/authHelper';
-import { goToInventoryPage, openFirstProductDetails } from '../helpers/inventoryHelper';
+import { login } from '../../helpers/authHelper';
+import { goToInventoryPage, openFirstProductDetails } from '../../helpers/inventoryHelper';
 
 test('Inventory - Détails du premier produit affiché', async ({ page }) => {
   await login(page, 'standard_user');
