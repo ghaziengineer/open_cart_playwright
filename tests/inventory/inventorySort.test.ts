@@ -4,7 +4,7 @@ import { goToInventoryPage, sortInventory, getProductPrices } from '../helpers/i
 
 test('Inventory - Tri des produits par prix (bas vers haut)', async ({ page }) => {
   await login(page, 'standard_user');
-  await goToInventoryPage(page);
+  await goToInventoryPage(page); // garantit que le dropdown est prêt
 
   await sortInventory(page, 'lohi'); // low to high
 
@@ -15,7 +15,7 @@ test('Inventory - Tri des produits par prix (bas vers haut)', async ({ page }) =
 
 test('Inventory - Tri des produits par prix (haut vers bas)', async ({ page }) => {
   await login(page, 'standard_user');
-  await goToInventoryPage(page);
+  await goToInventoryPage(page); // garantit que le dropdown est prêt
 
   await sortInventory(page, 'hilo'); // high to low
 
