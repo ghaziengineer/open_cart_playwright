@@ -1,4 +1,3 @@
-// tests/cart/removeFromCart.test.ts
 import { test, expect } from '@playwright/test';
 import { login } from '../helpers/authHelper';
 import { addItemToCart, removeItemFromCart } from '../helpers/cartHelper';
