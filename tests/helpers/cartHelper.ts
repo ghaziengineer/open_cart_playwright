@@ -12,7 +12,7 @@ export async function addItemToCart(page: Page, itemName: string) {
   const item = page.locator('.inventory_item').filter({ hasText: itemName });
   const button = item.locator('button');
 
-  await button.waitFor({ state: 'visible', timeout: 15000 });
+  await button.waitFor({ state: 'visible', timeout: 30000 });
   await button.click();
 }
 

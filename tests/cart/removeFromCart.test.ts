@@ -1,21 +1,25 @@
+// tests/cart/removeFromCart.test.ts
 import { test, expect } from '@playwright/test';
+import { login } from '../helpers/authHelper';
 import { addItemToCart, removeItemFromCart } from '../helpers/cartHelper';
 
-test.describe('Panier - Suppression d\'articles', () => {
-  /**
-   * Test pour vérifier qu'un article peut être retiré du panier.
-   */
-  test('Supprimer un article du panier', async ({ page }) => {
-    // Ajoute l'article d'abord pour pouvoir le retirer ensuite
-    await addItemToCart(page, 'Sauce Labs Backpack');
+test.describe('Panier - Suppression d\'article', () => {
 
-    // Supprime l'article ajouté précédemment
+  test.beforeEach(async ({ page }) => {
+    await login(page, 'standard_user');
+  });
+
+  test('Supprimer "Sauce Labs Backpack" du panier', async ({ page }) => {
+    await addItemToCart(page, 'Sauce Labs Backpack');
+    await page.click('.shopping_cart_link');
+
+    // Vérifie que l'article est bien ajouté
+    await expect(page.locator('.cart_item')).toContainText('Sauce Labs Backpack');
+
     await removeItemFromCart(page, 'Sauce Labs Backpack');
 
-    // Navigue vers la page du panier
-    await page.goto('https://www.saucedemo.com/cart.html');
-
-    // Vérifie que l'article n'est plus présent dans le panier
-    await expect(page.locator('.cart_item')).not.toContainText('Sauce Labs Backpack');
+    // Vérifie que le panier est vide
+    await expect(page.locator('.cart_item')).toHaveCount(0);
   });
+
 });
