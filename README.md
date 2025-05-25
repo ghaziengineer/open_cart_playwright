@@ -44,7 +44,11 @@ Il gère les différents types d’utilisateurs (valides et bloqués) et remplit
 
 ### -helpers/cartHelper.ts
 Contient la logique des actions liées au panier sur Saucedemo. Il inclut des fonctions pour ajouter, retirer et vérifier des articles dans le panier, tout en s'assurant d'être sur la bonne page avant chaque action. Les interactions se font via des sélecteurs ciblés sur les boutons « Add to cart » et « Remove », avec une navigation automatique entre les pages d’inventaire et de panier.
-
+## Continous integration CI ( github  actions ) 
+- Crée sauce_demo_playwright\.github\workflows\playwright.yml qui contient la logique du déclenchement de la pipeline
+Execution possible automatiquement :
+- aprés push , pull request
+localement avec :  $env:CI="true"; npx playwright test
 
 
 
