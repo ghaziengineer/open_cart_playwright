@@ -58,5 +58,8 @@ Execution possible automatiquement :
 - aprés push , pull request
 localement avec :  $env:CI="true"; npx playwright test
 
+## Référence 
+https://playwright.dev/ 
+
 
 
