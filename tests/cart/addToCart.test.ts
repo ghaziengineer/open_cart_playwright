@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { login } from '../helpers/authHelper';
-import { addItemToCart } from '../helpers/cartHelper';
+import { addItemToCart, CartItems } from '../helpers/cartHelper';
 
 test.describe('Panier - Ajout d\'article', () => {
   // Se connecter avant chaque test
@@ -12,8 +12,9 @@ test.describe('Panier - Ajout d\'article', () => {
    * Test pour vérifier qu'un article peut être ajouté au panier.
    */
   test('Ajouter un article au panier', async ({ page }) => {
-    await addItemToCart(page, 'Sauce Labs Backpack');
+    await addItemToCart(page, CartItems.BACKPACK);
     await page.goto('https://www.saucedemo.com/cart.html');
-    await expect(page.locator('.cart_item')).toContainText('Sauce Labs Backpack');
+    const cartItem = page.locator('.cart_item', { hasText: CartItems.BACKPACK });
+    await expect(cartItem).toBeVisible();
   });
 });

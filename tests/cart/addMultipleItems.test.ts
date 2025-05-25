@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { login } from '../helpers/authHelper';
-import { addItemToCart } from '../helpers/cartHelper';
+import { addItemToCart, CartItems } from '../helpers/cartHelper';
 
 test.describe('Panier - Ajout de plusieurs articles', () => {
   test.beforeEach(async ({ page }) => {
@@ -8,7 +8,12 @@ test.describe('Panier - Ajout de plusieurs articles', () => {
   });
 
   test('Ajouter plusieurs articles au panier', async ({ page }) => {
-    const items = ['Sauce Labs Backpack', 'Sauce Labs Bolt T-Shirt', 'Sauce Labs Onesie'];
+    const items = [
+      CartItems.BACKPACK,
+      CartItems.BOLT_TSHIRT,
+      CartItems.ONESIE
+    ];
+
     for (const item of items) {
       await addItemToCart(page, item);
     }
@@ -19,5 +24,5 @@ test.describe('Panier - Ajout de plusieurs articles', () => {
       const cartItem = page.locator('.cart_item', { hasText: item });
       await expect(cartItem).toBeVisible();
     }
-  });
+});
 });

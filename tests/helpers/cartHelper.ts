@@ -1,19 +1,29 @@
 import { Page } from '@playwright/test';
 
+export enum CartItems {
+BACKPACK = 'Sauce Labs Backpack',
+BOLT_TSHIRT = 'Sauce Labs Bolt T-Shirt',
+ONESIE = 'Sauce Labs Onesie'
+}
+
 /**
 * Ajoute un article au panier sur la page d'inventaire.
 * @param page - instance de la page Playwright
 * @param itemName - nom exact de l'article à ajouter
 */
-export async function addItemToCart(page: Page, itemName: string) {
-  await page.goto('https://www.saucedemo.com/inventory.html');
+export async function addItemToCart(page: Page, itemName: CartItems | string) {
+  // S'assurer d'être sur la page inventaire
+  if (!page.url().includes('/inventory.html')) {
+    await page.goto('https://www.saucedemo.com/inventory.html');
+  }
 
-  // Attendre l'élément du produit
-  const item = page.locator('.inventory_item').filter({ hasText: itemName });
-  const button = item.locator('button');
+  // Localiser un seul article par son texte exact, avec .first() pour éviter la violation du mode strict
+  const item = page.locator('.inventory_item').filter({ hasText: itemName }).first();
+  const addToCartButton = item.locator('button:has-text("Add to cart")');
 
-  await button.waitFor({ state: 'visible', timeout: 30000 });
-  await button.click();
+  // Attendre que le bouton soit visible et cliquable
+  await addToCartButton.waitFor({ state: 'visible', timeout: 30000 });
+  await addToCartButton.click();
 }
 
 /**
@@ -21,8 +31,30 @@ export async function addItemToCart(page: Page, itemName: string) {
  * @param page - instance de la page Playwright
  * @param itemName - nom exact de l'article à retirer
  */
-export async function removeItemFromCart(page: Page, itemName: string) {
-  await page.goto('https://www.saucedemo.com/cart.html');
-  // Clique sur le bouton "Remove" associé à l'article ciblé
-  await page.click(`text=${itemName} >> xpath=../.. >> button`);
+export async function removeItemFromCart(page: Page, itemName: CartItems | string) {
+  // S'assurer d'être sur la page panier
+  if (!page.url().includes('/cart.html')) {
+    await page.goto('https://www.saucedemo.com/cart.html');
+  }
+
+  // Cliquer sur le bouton Remove associé à l'article ciblé
+  const item = page.locator('.cart_item').filter({ hasText: itemName });
+  const removeButton = item.locator('button:text("Remove")');
+
+  await removeButton.waitFor({ state: 'visible', timeout: 15000 });
+  await removeButton.click();
+}
+
+/**
+ * Vérifie si un article est présent dans le panier.
+ * @param page - instance de la page Playwright
+ * @param itemName - nom exact de l'article
+ * @returns boolean - true si présent, false sinon
+ */
+export async function isItemInCart(page: Page, itemName: CartItems | string): Promise<boolean> {
+  if (!page.url().includes('/cart.html')) {
+    await page.goto('https://www.saucedemo.com/cart.html');
+  }
+  const item = page.locator('.cart_item').filter({ hasText: itemName });
+  return await item.count() > 0;
 }
