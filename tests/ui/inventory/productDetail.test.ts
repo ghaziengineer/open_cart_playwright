@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { login } from '../helpers/authHelper';
+import { login } from '../../helpers/authHelper';
 
 test('Product List - Chaque produit affiche nom, description et prix', async ({ page }) => {
   await login(page, 'standard_user');

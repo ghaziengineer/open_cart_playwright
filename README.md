@@ -17,27 +17,31 @@ npx tsc --init
 ```bash
 /project-root
 ├── tests/
-│   └── auth/
-│       ├── login.test.ts                  # Tests de connexion
-│       ├── logout.test.ts                 # Tests de déconnexion
-│       ├── invalidCredentials.test.ts     # Tests pour identifiants invalides
-│       └── emptyFields.test.ts            # Tests pour champs vides
-|   └── cart/
-|       ├── addToCart.test.ts              # Ajout d'un seul article
-|       ├── addMultipleItems.test.ts       # Ajout de plusieurs articles
-|       ├── removeFromCart.test.ts         # Suppression d'articles
-|       ├── cartCounter.test.ts            # Vérifie le badge du panier
-|       ├── continueShopping.test.ts       # Test du bouton "Continue Shopping"
-|       └── unauthorizedAccess.test.ts     # Accès au panier sans login
-|   └── inventory/
-|       ├── inventoryImagesLoad.test.ts    # Vérifie le chargement des images produits
-|       ├── inventoryItemDetails.test.ts   # Vérifie l’affichage des détails produits
-|       ├── inventoryPageLoad.test.ts      # Vérifie le chargement de la page inventory
-|       ├── inventorySort.test.ts          # Vérifie le tri des produits
-|       ├── productDetail.test.ts          # Vérifie la page détail produit
-|       └── productList.test.ts            # Vérifie la liste des produits
-|
-├── helpers/
+│   ├── ui/
+|   |    └── auth/
+│   |    |   ├── login.test.ts                  # Tests de connexion
+│   |    |   ├── logout.test.ts                 # Tests de déconnexion
+│   |    |   ├── invalidCredentials.test.ts     # Tests pour identifiants invalides
+│   |    |   └── emptyFields.test.ts            # Tests pour champs vides
+|   |    └── cart/
+|   |    |   ├── addToCart.test.ts              # Ajout d'un seul article
+|   |    |   ├── addMultipleItems.test.ts       # Ajout de plusieurs articles
+|   |    |   ├── removeFromCart.test.ts         # Suppression d'articles
+|   |    |   ├── cartCounter.test.ts            # Vérifie le badge du panier
+|   |    |   ├── continueShopping.test.ts       # Test du bouton "Continue Shopping"
+|   |    |   └── unauthorizedAccess.test.ts     # Accès au panier sans login
+|   |    └── inventory/
+|   |        ├── inventoryImagesLoad.test.ts    # Vérifie le chargement des images produits
+|   |        ├── inventoryItemDetails.test.ts   # Vérifie l’affichage des détails produits
+|   |        ├── inventoryPageLoad.test.ts      # Vérifie le chargement de la page inventory
+|   |        ├── inventorySort.test.ts          # Vérifie le tri des produits
+|   |        ├── productDetail.test.ts          # Vérifie la page détail produit
+|   |        └── productList.test.ts            # Vérifie la liste des produits
+|   |
+|   ├── api/
+|   ├── performance/
+|   ├── security/
+|   └── helpers/
 |       ├── authHelper.ts                  # Fonctions d'authentification (login)
 |       ├── cartHelper.ts                  # Fonctions du panier (cart)
 |       ├── inventoryHelper.ts             # Fonctions utilitaires pour tests inventory

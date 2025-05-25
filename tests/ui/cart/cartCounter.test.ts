@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { addItemToCart, CartItems } from '../helpers/cartHelper';
-import { login, ValidUser } from '../helpers/authHelper';
+import { addItemToCart, CartItems } from '../../helpers/cartHelper';
+import { login, ValidUser } from '../../helpers/authHelper';
 
 test('Panier - Badge compteur reflète correctement le nombre d’articles', async ({ page }) => {
   // Se connecter avec un utilisateur valide

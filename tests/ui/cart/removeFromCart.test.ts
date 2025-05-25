@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { login } from '../helpers/authHelper';
-import { addItemToCart, removeItemFromCart, CartItems } from '../helpers/cartHelper';
+import { login } from '../../helpers/authHelper';
+import { addItemToCart, removeItemFromCart, CartItems } from '../../helpers/cartHelper';
 
 test.describe('Panier - Suppression d\'article', () => {
   test.beforeEach(async ({ page }) => {
