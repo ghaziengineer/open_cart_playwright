@@ -42,6 +42,9 @@ npx tsc --init
 contient la logique pour la connexion à Saucedemo.
 Il gère les différents types d’utilisateurs (valides et bloqués) et remplit automatiquement les champs du formulaire de login.
 
+### -helpers/cartHelper.ts
+Contient la logique des actions liées au panier sur Saucedemo. Il inclut des fonctions pour ajouter, retirer et vérifier des articles dans le panier, tout en s'assurant d'être sur la bonne page avant chaque action. Les interactions se font via des sélecteurs ciblés sur les boutons « Add to cart » et « Remove », avec une navigation automatique entre les pages d’inventaire et de panier.
+
 
 
 
