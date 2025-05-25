@@ -1,5 +1,8 @@
 import { Page } from '@playwright/test';
 
+/**
+* Enumération des noms d'articles utilisés dans le panier.
+*/
 export enum CartItems {
 BACKPACK = 'Sauce Labs Backpack',
 BOLT_TSHIRT = 'Sauce Labs Bolt T-Shirt',
@@ -8,6 +11,7 @@ ONESIE = 'Sauce Labs Onesie'
 
 /**
 * Ajoute un article au panier sur la page d'inventaire.
+* Si la page n'est pas l'inventaire, elle s'y rend.
 * @param page - instance de la page Playwright
 * @param itemName - nom exact de l'article à ajouter
 */
@@ -28,6 +32,7 @@ export async function addItemToCart(page: Page, itemName: CartItems | string) {
 
 /**
  * Supprime un article du panier sur la page du panier.
+ * Si la page n'est pas le panier, elle s'y rend.
  * @param page - instance de la page Playwright
  * @param itemName - nom exact de l'article à retirer
  */
@@ -47,6 +52,7 @@ export async function removeItemFromCart(page: Page, itemName: CartItems | strin
 
 /**
  * Vérifie si un article est présent dans le panier.
+ * Si la page n'est pas le panier, elle s'y rend.
  * @param page - instance de la page Playwright
  * @param itemName - nom exact de l'article
  * @returns boolean - true si présent, false sinon
