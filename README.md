@@ -18,42 +18,40 @@ npx tsc --init
 ```bash
 /project-root
 ├── tests/
-│   ├── ui/                                # Tests fonctionnels UI end-to-end avec Playwright
-│   │   ├── auth/                          # Scénarios liés à l’authentification utilisateur
-│   │   │   ├── login.test.ts              # Tests de connexion valides
-│   │   │   ├── logout.test.ts             # Tests de déconnexion
-│   │   │   ├── invalidCredentials.test.ts # Tests pour identifiants invalides
-│   │   │   └── emptyFields.test.ts        # Tests pour champs de connexion vides
-│   │   ├── cart/                          # Scénarios liés au panier d’achats
-│   │   │   ├── addToCart.test.ts          # Ajout d’un seul article au panier
-│   │   │   ├── addMultipleItems.test.ts   # Ajout de plusieurs articles simultanément
-│   │   │   ├── removeFromCart.test.ts     # Suppression d’articles du panier
-│   │   │   ├── cartCounter.test.ts        # Vérification du compteur (badge) du panier
-│   │   │   ├── continueShopping.test.ts   # Test du bouton « Continue Shopping »
-│   │   │   └── unauthorizedAccess.test.ts # Accès non autorisé au panier sans connexion
-│   │   └── inventory/                     # Tests liés à la gestion et affichage des produits
-│   │       ├── inventoryImagesLoad.test.ts # Vérifie le chargement des images produits
-│   │       ├── inventoryItemDetails.test.ts # Vérifie les détails des produits affichés
-│   │       ├── inventoryPageLoad.test.ts  # Vérifie le chargement complet de la page inventaire
-│   │       ├── inventorySort.test.ts      # Vérifie le fonctionnement du tri des produits
-│   │       ├── productDetail.test.ts      # Vérifie la page de détail d’un produit
-│   │       └── productList.test.ts        # Vérifie la liste des produits affichés
-├── tests/performance/                    # Tests de performance et charge (ex: JMeter)
+│   ├── ui/                                    # Tests fonctionnels UI end-to-end 
+│   │   ├── auth/                              # Scénarios liés à l’authentification utilisateur
+│   │   │   ├── login.test.ts                  # Tests de connexion valides
+│   │   │   ├── logout.test.ts                 # Tests de déconnexion
+│   │   │   ├── invalidCredentials.test.ts     # Tests pour identifiants invalides
+│   │   │   └── emptyFields.test.ts            # Tests pour champs de connexion vides
+│   │   ├── cart/                              # Scénarios liés au panier d’achats
+│   │   │   ├── addToCart.test.ts              # Ajout d’un seul article au panier
+│   │   │   ├── addMultipleItems.test.ts       # Ajout de plusieurs articles simultanément
+│   │   │   ├── removeFromCart.test.ts         # Suppression d’articles du panier
+│   │   │   ├── cartCounter.test.ts            # Vérification du compteur (badge) du panier
+│   │   │   ├── continueShopping.test.ts       # Test du bouton « Continue Shopping »
+│   │   │   └── unauthorizedAccess.test.ts     # Accès non autorisé au panier sans connexion
+│   │   └── inventory/                         # Tests liés à la gestion et affichage des produits
+│   │       ├── inventoryImagesLoad.test.ts    # Vérifie le chargement des images produits
+│   │       ├── inventoryItemDetails.test.ts   # Vérifie les détails des produits affichés
+│   │       ├── inventoryPageLoad.test.ts      # Vérifie le chargement complet de la page inventaire
+│   │       ├── inventorySort.test.ts          # Vérifie le fonctionnement du tri des produits
+│   │       ├── productDetail.test.ts          # Vérifie la page de détail d’un produit
+│   │       └── productList.test.ts            # Vérifie la liste des produits affichés
 │
-├── tests/security/                       # Tests de sécurité (accès non autorisé, redirections)
-│   ├── redirectAfterLogout.test.ts      # Redirection après déconnexion
-│   ├── csrfProtection.test.ts           # Test de protection CSRF (si applicable)
-│   └── sessionExpiration.test.ts        # Test expiration de session / token
+├── tests/security/                            # Tests de sécurité (accès non autorisé, redirections)
+│   ├── accessWithoutLogin.test.ts             # Redirection sans login vers page login
+│   ├── lockedOutUserAccess.test.ts            # Test de restriction d'utlisateur bloqué
+│   └── logoutRedirect.test.ts                 # Test de direction vers login lors du déconnexion 
 │
-├── helpers/                             # Fonctions utilitaires partagées et helpers
-│   ├── authHelper.ts                    # Fonctions réutilisables liées à l’authentification
-│   ├── cartHelper.ts                    # Fonctions utilitaires pour gérer le panier
-│   ├── inventoryHelper.ts               # Fonctions spécifiques aux tests d’inventaire
-│   └── apiHelper.ts                     # Helper commun pour appels API et gestion requêtes
+├── helpers/                                   # Fonctions utilitaires partagées et helpers
+│   ├── authHelper.ts                          # Fonctions réutilisables liées à l’authentification
+│   ├── cartHelper.ts                          # Fonctions utilitaires pour gérer le panier
+│   ├── inventoryHelper.ts                     # Fonctions spécifiques aux tests d’inventaire
 │
-├── playwright.config.ts                  # Configuration générale Playwright (tests UI)
-├── tsconfig.json                        # Configuration TypeScript
-└── package.json                         # Gestionnaire de dépendances et scripts npm
+├── playwright.config.ts                       # Configuration générale Playwright (tests UI)
+├── tsconfig.json                              # Configuration TypeScript
+└── package.json                               # Gestionnaire de dépendances et scripts npm
 
 ```
 ## 🚀 Exécution des tests
