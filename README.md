@@ -1,5 +1,5 @@
 # 🧪 Automatisation des tests Saucedemo avec Playwright & TypeScript
-Ce projet met en œuvre des tests automatisés E2E, API, performance et sécurité pour le site saucedemo.com à l’aide de Playwright et TypeScript.
+Ce projet met en œuvre des tests automatisés **E2E et sécurité** pour le site saucedemo.com à l’aide de Playwright et TypeScript.
 
 ## ⚙️ Installation & Configuration
 ```bash
